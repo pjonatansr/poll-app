@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class PollController {
 
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-  public Poll getPoll(@PathVariable("id") String id) {
+  public Poll getPoll(@PathVariable("id") int id) {
+
     // TO-DO: get persited poll
-    return new Poll("First Poll!");
+    Poll pollInstance = new Poll("Poll " + id);
+    pollInstance.setId(id);
+
+    return pollInstance;
   }
 
   @RequestMapping(method = RequestMethod.POST)
