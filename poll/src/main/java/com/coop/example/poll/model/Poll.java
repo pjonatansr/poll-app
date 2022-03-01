@@ -5,12 +5,16 @@ import java.util.List;
 public class Poll {
   private long id;
   private String description;
-  private int durationMinutes;
+  private int durationMinutes = 1;
   private List<Vote> vows;
 
   public Poll(String description, int durationMinutes) {
     this.description = description;
     this.durationMinutes = durationMinutes;
+  }
+
+  public Poll(String description) {
+    this.description = description;
   }
 
   public long getId() {
