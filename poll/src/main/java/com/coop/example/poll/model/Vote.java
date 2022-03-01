@@ -2,14 +2,13 @@ package com.coop.example.poll.model;
 
 public class Vote {
   private long id;
+  private boolean value;
+  private long memberId;
 
   public Vote(boolean value, long voterId) {
     this.value = value;
-    this.voterId = voterId;
+    this.memberId = voterId;
   }
-
-  private boolean value;
-  private long voterId;
 
   public long getId() {
     return id;
@@ -28,11 +27,11 @@ public class Vote {
   }
 
   public long getVoterId() {
-    return voterId;
+    return memberId;
   }
 
   public void setVoterId(long voterId) {
-    this.voterId = voterId;
+    this.memberId = voterId;
   }
 
 }
