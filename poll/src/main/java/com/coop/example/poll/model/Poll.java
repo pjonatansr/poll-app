@@ -3,13 +3,14 @@ package com.coop.example.poll.model;
 import java.util.List;
 
 public class Poll {
-
   private long id;
   private String description;
+  private int durationMinutes;
   private List<Vote> vows;
 
-  public Poll(String description) {
+  public Poll(String description, int durationMinutes) {
     this.description = description;
+    this.durationMinutes = durationMinutes;
   }
 
   public long getId() {
@@ -26,6 +27,14 @@ public class Poll {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public int getDurationMinutes() {
+    return durationMinutes;
+  }
+
+  public void setDurationMinutes(int durationMinutes) {
+    this.durationMinutes = durationMinutes;
   }
 
   public List<Vote> getVows() {
