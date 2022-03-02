@@ -1,13 +1,27 @@
 package com.coop.example.poll.model;
 
-public class Vote {
-  private long id;
-  private boolean value;
-  private long memberId;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
-  public Vote(boolean value, long voterId) {
+@Entity
+public class Vote {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
+
+  @Column(name = "fl_value")
+  private boolean value;
+
+  @OneToOne()
+  private Member member;
+
+  public Vote(boolean value, Member member) {
     this.value = value;
-    this.memberId = voterId;
+    this.member = member;
   }
 
   public long getId() {
@@ -26,12 +40,12 @@ public class Vote {
     this.value = value;
   }
 
-  public long getVoterId() {
-    return memberId;
+  public Member getMember() {
+    return member;
   }
 
-  public void setVoterId(long voterId) {
-    this.memberId = voterId;
+  public void setMember(Member member) {
+    this.member = member;
   }
 
 }

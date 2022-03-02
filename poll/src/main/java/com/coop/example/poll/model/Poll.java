@@ -1,12 +1,22 @@
 package com.coop.example.poll.model;
 
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Poll {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
+
+  @Column(name = "description")
   private String description;
+
+  @Column(name = "duration_minutes")
   private int durationMinutes = 1;
-  private List<Vote> vows;
 
   public Poll(String description, int durationMinutes) {
     this.description = description;
@@ -39,13 +49,5 @@ public class Poll {
 
   public void setDurationMinutes(int durationMinutes) {
     this.durationMinutes = durationMinutes;
-  }
-
-  public List<Vote> getVows() {
-    return vows;
-  }
-
-  public void setVows(List<Vote> vows) {
-    this.vows = vows;
   }
 }
