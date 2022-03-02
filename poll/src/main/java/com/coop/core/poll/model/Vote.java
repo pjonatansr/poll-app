@@ -6,7 +6,12 @@ import javax.persistence.OneToOne;
 
 import com.coop.core.common.model.BaseEntity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@NoArgsConstructor
 public class Vote extends BaseEntity {
   @Column(name = "fl_value", nullable = false)
   private boolean value;

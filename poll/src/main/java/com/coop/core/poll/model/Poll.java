@@ -5,7 +5,12 @@ import javax.persistence.Entity;
 
 import com.coop.core.common.model.BaseEntity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@NoArgsConstructor
 public class Poll extends BaseEntity {
   @Column(name = "description", nullable = false)
   private String description;
@@ -20,6 +25,9 @@ public class Poll extends BaseEntity {
 
   public Poll(String description) {
     this.description = description;
+  }
+
+  public Poll() {
   }
 
   public String getDescription() {
