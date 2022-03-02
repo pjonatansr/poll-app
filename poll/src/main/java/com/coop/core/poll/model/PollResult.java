@@ -2,30 +2,20 @@ package com.coop.core.poll.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.coop.core.common.model.BaseEntity;
+
 @Entity
-public class PollResult {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
-
+public class PollResult extends BaseEntity {
   @OneToOne
   private PollSession pollSession;
 
-  @Column(name = "fl_approved")
+  @Column(name = "fl_approved", nullable = false)
   private boolean approved;
 
   @Column(name = "total_percent_win")
   private int totalPercentWin;
-
-  public int getId() {
-    return this.id;
-  }
 
   public PollSession getPollSession() {
     return pollSession;
@@ -33,10 +23,6 @@ public class PollResult {
 
   public void setPollSessionId(PollSession pollSession) {
     this.pollSession = pollSession;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 
   public boolean isApproved() {

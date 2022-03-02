@@ -2,37 +2,24 @@ package com.coop.core.poll.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import com.coop.core.common.model.BaseEntity;
 
 @Entity
-public class Poll {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
-
-  @Column(name = "description")
+public class Poll extends BaseEntity {
+  @Column(name = "description", nullable = false)
   private String description;
 
-  @Column(name = "duration_minutes")
-  private int durationMinutes = 1;
+  @Column(name = "duration_minutes", columnDefinition = "integer default 1", nullable = false)
+  private Integer durationMinutes = 1;
 
-  public Poll(String description, int durationMinutes) {
+  public Poll(String description, Integer durationMinutes) {
     this.description = description;
     this.durationMinutes = durationMinutes;
   }
 
   public Poll(String description) {
     this.description = description;
-  }
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
   }
 
   public String getDescription() {
@@ -43,11 +30,11 @@ public class Poll {
     this.description = description;
   }
 
-  public int getDurationMinutes() {
+  public Integer getDurationMinutes() {
     return durationMinutes;
   }
 
-  public void setDurationMinutes(int durationMinutes) {
+  public void setDurationMinutes(Integer durationMinutes) {
     this.durationMinutes = durationMinutes;
   }
 }

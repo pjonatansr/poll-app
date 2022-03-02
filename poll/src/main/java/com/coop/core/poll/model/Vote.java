@@ -2,18 +2,13 @@ package com.coop.core.poll.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-@Entity
-public class Vote {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+import com.coop.core.common.model.BaseEntity;
 
-  @Column(name = "fl_value")
+@Entity
+public class Vote extends BaseEntity {
+  @Column(name = "fl_value", nullable = false)
   private boolean value;
 
   @OneToOne()
@@ -22,14 +17,6 @@ public class Vote {
   public Vote(boolean value, Member member) {
     this.value = value;
     this.member = member;
-  }
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
   }
 
   public boolean isValue() {

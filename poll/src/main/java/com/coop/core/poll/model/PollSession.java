@@ -5,22 +5,17 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-@Entity
-public class PollSession {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+import com.coop.core.common.model.BaseEntity;
 
+@Entity
+public class PollSession extends BaseEntity {
   @ManyToOne
   private Poll poll;
 
-  @Column(name = "start_date")
+  @Column(name = "start_date", nullable = false)
   private Date startDate;
 
   @OneToMany(targetEntity = Vote.class)
@@ -34,14 +29,6 @@ public class PollSession {
   public PollSession(Poll poll, Date startDate) {
     this.poll = poll;
     this.startDate = startDate;
-  }
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
   }
 
   public Poll getPoll() {
