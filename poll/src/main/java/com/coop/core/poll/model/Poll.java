@@ -11,7 +11,7 @@ public class Poll extends BaseEntity {
   private String description;
 
   @Column(name = "duration_minutes", columnDefinition = "integer default 1", nullable = false)
-  private Integer durationMinutes = 1;
+  private Integer durationMinutes;
 
   public Poll(String description, Integer durationMinutes) {
     this.description = description;
