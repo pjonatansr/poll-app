@@ -1,4 +1,4 @@
-package com.coop.example.poll.model;
+package com.coop.core.poll.model;
 
 import java.util.Date;
 import java.util.List;

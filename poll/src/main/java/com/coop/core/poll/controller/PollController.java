@@ -1,6 +1,6 @@
-package com.coop.example.poll.controller;
+package com.coop.core.poll.controller;
 
-import com.coop.example.poll.model.Poll;
+import com.coop.core.poll.model.Poll;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,6 @@ public class PollController {
 
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   public Poll getPoll(@PathVariable("id") int id) {
-
     // TO-DO: get persited poll
     Poll pollInstance = new Poll("Poll " + id);
     pollInstance.setId(id);

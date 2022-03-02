@@ -1,4 +1,4 @@
-package com.coop.example.poll.model;
+package com.coop.core.poll.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

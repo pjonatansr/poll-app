@@ -1,4 +1,4 @@
-package com.coop.example.poll;
+package com.coop.core.poll;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
