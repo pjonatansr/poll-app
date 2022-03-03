@@ -1,13 +1,12 @@
 package com.coop.core.poll.service;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.coop.core.poll.dto.PollDto;
 import com.coop.core.poll.model.Poll;
 import com.coop.core.poll.model.Session;
 import com.coop.core.poll.repository.IPollRepository;
-import com.coop.core.poll.repository.ISessionRepository;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,6 @@ public class PollService implements IPollService {
 
   @Autowired
   private IPollRepository pollRepository;
-
-  @Autowired
-  private ISessionRepository sessionRepository;
 
   @Autowired
   private ModelMapper modelMapper;
@@ -36,11 +32,17 @@ public class PollService implements IPollService {
     }
 
     Poll pollInstance = modelMapper.map(poll, Poll.class);
-    pollInstance = pollRepository.save(pollInstance);
 
-    LocalDateTime startDate = poll.getStartDate();
-    Session session = new Session(pollInstance, startDate);
-    sessionRepository.save(session);
+    Session session = new Session(pollInstance, poll.getStartDate());
+
+    List<Session> sessions = pollInstance.getSessions();
+    if (sessions == null) {
+      sessions = new ArrayList<Session>();
+    }
+    sessions.add(session);
+    pollInstance.setSessions(sessions);
+
+    pollInstance = pollRepository.save(pollInstance);
 
     return pollInstance;
   }
