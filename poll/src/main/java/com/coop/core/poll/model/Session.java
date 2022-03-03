@@ -31,8 +31,10 @@ public class Session extends BaseEntity {
     this.startDate = startDate;
   }
 
-  @OneToMany(targetEntity = Vote.class)
-  private List<Vote> vows;
+  @OneToMany(mappedBy = "session", cascade = {
+      CascadeType.ALL
+  })
+  private List<Vote> votes;
 
   public Session() {
   }
@@ -56,6 +58,6 @@ public class Session extends BaseEntity {
   }
 
   public List<Vote> getVows() {
-    return vows;
+    return votes;
   }
 }

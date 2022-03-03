@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Result extends BaseEntity {
-  @OneToOne
+  @OneToOne(targetEntity = Session.class)
   private Session pollSession;
 
   @Column(name = "fl_approved", nullable = false)

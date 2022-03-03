@@ -1,10 +1,14 @@
 package com.coop.core.poll.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.coop.core.common.model.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,9 +23,25 @@ public class Vote extends BaseEntity {
   @OneToOne()
   private Member member;
 
+  @JsonIgnore
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "session_id")
+  private Session session;
+
+  public Session getSession() {
+    return this.session;
+  }
+
+  public void setSession(Session session) {
+    this.session = session;
+  }
+
   public Vote(boolean value, Member member) {
     this.value = value;
     this.member = member;
+  }
+
+  public Vote() {
   }
 
   public boolean isValue() {
