@@ -29,7 +29,7 @@ public class PollController {
 
   @RequestMapping(method = RequestMethod.POST)
   public Poll save(@RequestBody PollDto pollInput) {
-    Poll pollInstance = pollService.savePoll(pollInput);
+    Poll pollInstance = pollService.save(pollInput);
 
     return pollInstance;
   }
