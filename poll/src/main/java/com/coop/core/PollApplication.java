@@ -1,4 +1,4 @@
-package com.coop.core.poll;
+package com.coop.core;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
