@@ -5,6 +5,7 @@ import com.coop.core.poll.model.Poll;
 import com.coop.core.poll.service.IPollService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +29,9 @@ public class PollController {
   }
 
   @RequestMapping(method = RequestMethod.POST)
-  public Poll save(@RequestBody PollDto pollInput) {
+  public ResponseEntity<Poll> save(@RequestBody PollDto pollInput) {
     Poll pollInstance = pollService.save(pollInput);
 
-    return pollInstance;
+    return ResponseEntity.ok(pollInstance);
   }
 }
