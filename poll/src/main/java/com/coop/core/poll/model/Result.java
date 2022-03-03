@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class PollResult extends BaseEntity {
+public class Result extends BaseEntity {
   @OneToOne
-  private PollSession pollSession;
+  private Session pollSession;
 
   @Column(name = "fl_approved", nullable = false)
   private boolean approved;
@@ -22,11 +22,11 @@ public class PollResult extends BaseEntity {
   @Column(name = "total_percent_win")
   private int totalPercentWin;
 
-  public PollSession getPollSession() {
+  public Session getPollSession() {
     return pollSession;
   }
 
-  public void setPollSessionId(PollSession pollSession) {
+  public void setPollSessionId(Session pollSession) {
     this.pollSession = pollSession;
   }
 

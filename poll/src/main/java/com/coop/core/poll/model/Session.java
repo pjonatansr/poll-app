@@ -16,22 +16,33 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class PollSession extends BaseEntity {
+public class Session extends BaseEntity {
   @ManyToOne
   private Poll poll;
 
   @Column(name = "start_date", nullable = false)
   private Date startDate;
 
+  public Date getStartDate() {
+    return this.startDate;
+  }
+
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
+  }
+
   @OneToMany(targetEntity = Vote.class)
   private List<Vote> vows;
 
-  public PollSession(Poll poll) {
+  public Session() {
+  }
+
+  public Session(Poll poll) {
     this.poll = poll;
     this.startDate = new Date();
   }
 
-  public PollSession(Poll poll, Date startDate) {
+  public Session(Poll poll, Date startDate) {
     this.poll = poll;
     this.startDate = startDate;
   }
@@ -44,15 +55,7 @@ public class PollSession extends BaseEntity {
     this.poll = poll;
   }
 
-  public Date getStartDate() {
-    return startDate;
-  }
-
   public List<Vote> getVows() {
     return vows;
-  }
-
-  public void setVows(List<Vote> vows) {
-    this.vows = vows;
   }
 }
