@@ -1,23 +1,27 @@
 package com.coop.core.poll.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Data
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class PollDto {
-  private Long id;
+  @NonNull
   private String description;
   private Integer durationMinutes;
-  private Date startDate;
-
-  public Long getId() {
-    return this.id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
+  @NonNull
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private LocalDateTime startDate;
 
   public String getDescription() {
     return this.description;
@@ -35,11 +39,11 @@ public class PollDto {
     this.durationMinutes = durationMinutes;
   }
 
-  public Date getStartDate() {
+  public LocalDateTime getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(Date startDate) {
+  public void setStartDate(LocalDateTime startDate) {
     this.startDate = startDate;
   }
 

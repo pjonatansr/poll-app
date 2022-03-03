@@ -1,6 +1,6 @@
 package com.coop.core.poll.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -21,13 +21,13 @@ public class Session extends BaseEntity {
   private Poll poll;
 
   @Column(name = "start_date", nullable = false)
-  private Date startDate;
+  private LocalDateTime startDate;
 
-  public Date getStartDate() {
+  public LocalDateTime getStartDate() {
     return this.startDate;
   }
 
-  public void setStartDate(Date startDate) {
+  public void setStartDate(LocalDateTime startDate) {
     this.startDate = startDate;
   }
 
@@ -39,10 +39,10 @@ public class Session extends BaseEntity {
 
   public Session(Poll poll) {
     this.poll = poll;
-    this.startDate = new Date();
+    this.startDate = LocalDateTime.now();
   }
 
-  public Session(Poll poll, Date startDate) {
+  public Session(Poll poll, LocalDateTime startDate) {
     this.poll = poll;
     this.startDate = startDate;
   }

@@ -1,6 +1,6 @@
 package com.coop.core.poll.service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.coop.core.poll.dto.PollDto;
@@ -38,10 +38,8 @@ public class PollService implements IPollService {
     Poll pollInstance = modelMapper.map(poll, Poll.class);
     pollInstance = pollRepository.save(pollInstance);
 
-    Date startDate = poll.getStartDate();
-    
+    LocalDateTime startDate = poll.getStartDate();
     Session session = new Session(pollInstance, startDate);
-
     sessionRepository.save(session);
 
     return pollInstance;
