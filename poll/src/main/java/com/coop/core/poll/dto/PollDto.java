@@ -1,5 +1,7 @@
 package com.coop.core.poll.dto;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -7,6 +9,7 @@ public class PollDto {
   private Long id;
   private String description;
   private Integer durationMinutes;
+  private Date startDate;
 
   public Long getId() {
     return this.id;
@@ -30,6 +33,14 @@ public class PollDto {
 
   public void setDurationMinutes(Integer durationMinutes) {
     this.durationMinutes = durationMinutes;
+  }
+
+  public Date getStartDate() {
+    return startDate;
+  }
+
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
   }
 
 }
