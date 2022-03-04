@@ -12,12 +12,16 @@ import com.coop.core.poll.repository.IPollRepository;
 
 import org.modelmapper.ModelMapper;
 import org.quartz.SchedulerException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PollService implements IPollService {
+
+  Logger logger = LoggerFactory.getLogger(PollService.class);
 
   @Autowired
   private IPollRepository pollRepository;
@@ -57,7 +61,7 @@ public class PollService implements IPollService {
     try {
       sessionService.startSession(session);
     } catch (SchedulerException e) {
-
+      logger.error("An error occurred while trying to start session.", e);
       e.printStackTrace();
     }
 

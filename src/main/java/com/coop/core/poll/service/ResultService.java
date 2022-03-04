@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import com.coop.core.common.exception.ValidationException;
 import com.coop.core.poll.model.Result;
 import com.coop.core.poll.model.Session;
 import com.coop.core.poll.model.Vote;
@@ -50,7 +51,7 @@ public class ResultService implements IResultService {
   }
 
   @Override
-  public Result getBySessionId(Long sessionId) {
+  public Result getBySessionId(Long sessionId) throws ValidationException {
     Result result = resultRepository.getResultBySessionId(sessionId);
 
     if (result == null) {
@@ -61,6 +62,10 @@ public class ResultService implements IResultService {
       if (endDate.isBefore(LocalDateTime.now())) {
         calculateResult(session);
         result = resultRepository.getResultBySessionId(sessionId);
+
+        if (result == null) {
+          throw new ValidationException("That poll ended with no votes.");
+        }
       }
     }
 
