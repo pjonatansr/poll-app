@@ -1,11 +1,14 @@
 package com.coop.core.poll.service;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import com.coop.core.poll.model.Result;
 import com.coop.core.poll.model.Session;
 import com.coop.core.poll.model.Vote;
 import com.coop.core.poll.repository.IResultRepository;
+import com.coop.core.poll.repository.ISessionRepository;
 import com.coop.core.poll.repository.IVoteRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ public class ResultService implements IResultService {
 
   @Autowired
   private IVoteRepository voteRepository;
+
+  @Autowired
+  private ISessionRepository sessionRepository;
 
   @Override
   public void calculateResult(Session session) {
@@ -45,7 +51,20 @@ public class ResultService implements IResultService {
 
   @Override
   public Result getBySessionId(Long sessionId) {
-    return resultRepository.getResultBySessionId(sessionId);
+    Result result = resultRepository.getResultBySessionId(sessionId);
+
+    if (result == null) {
+      Session session = sessionRepository.findById(sessionId).get();
+      int pollDuration = session.getPoll().getDurationMinutes();
+      LocalDateTime endDate = session.getStartDate().plus(pollDuration + 5, ChronoUnit.MINUTES);
+
+      if (endDate.isBefore(LocalDateTime.now())) {
+        calculateResult(session);
+        result = resultRepository.getResultBySessionId(sessionId);
+      }
+    }
+
+    return result;
   }
 
 }
