@@ -1,11 +1,11 @@
 package com.coop.core.poll.controller;
 
+import com.coop.core.common.exception.ValidationException;
 import com.coop.core.poll.dto.VoteDto;
 import com.coop.core.poll.model.Session;
 import com.coop.core.poll.model.Vote;
 import com.coop.core.poll.service.IVoteService;
 
-import org.quartz.xml.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

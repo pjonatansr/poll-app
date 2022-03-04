@@ -1,11 +1,11 @@
 package com.coop.core.poll.controller;
 
+import com.coop.core.common.exception.ValidationException;
 import com.coop.core.poll.dto.PollDto;
 import com.coop.core.poll.model.Poll;
 import com.coop.core.poll.service.IPollService;
 
 import org.quartz.SchedulerException;
-import org.quartz.xml.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +21,8 @@ public class PollController {
   private IPollService pollService;
 
   @RequestMapping(method = RequestMethod.POST)
-  public ResponseEntity<Poll> save(@RequestBody PollDto pollInput) throws ValidationException, SchedulerException {
-    Poll pollInstance = pollService.save(pollInput);
+  public ResponseEntity<Poll> save(@RequestBody PollDto pollDto) throws ValidationException, SchedulerException {
+    Poll pollInstance = pollService.save(pollDto);
 
     return ResponseEntity.ok(pollInstance);
   }
