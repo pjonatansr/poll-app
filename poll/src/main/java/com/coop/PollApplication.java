@@ -1,4 +1,4 @@
-package com.coop.core;
+package com.coop;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
