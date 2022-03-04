@@ -4,9 +4,10 @@ import com.coop.core.poll.dto.PollDto;
 import com.coop.core.poll.model.Poll;
 import com.coop.core.poll.service.IPollService;
 
+import org.quartz.SchedulerException;
+import org.quartz.xml.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,17 +20,8 @@ public class PollController {
   @Autowired
   private IPollService pollService;
 
-  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-  public Poll getPoll(@PathVariable("id") Long id) {
-    // TO-DO: get persited poll
-    Poll pollInstance = new Poll("Poll " + id);
-    pollInstance.setId(id);
-
-    return pollInstance;
-  }
-
   @RequestMapping(method = RequestMethod.POST)
-  public ResponseEntity<Poll> save(@RequestBody PollDto pollInput) {
+  public ResponseEntity<Poll> save(@RequestBody PollDto pollInput) throws ValidationException, SchedulerException {
     Poll pollInstance = pollService.save(pollInput);
 
     return ResponseEntity.ok(pollInstance);

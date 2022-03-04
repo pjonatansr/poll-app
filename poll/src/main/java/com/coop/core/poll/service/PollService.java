@@ -1,5 +1,6 @@
 package com.coop.core.poll.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,8 @@ import com.coop.core.poll.model.Session;
 import com.coop.core.poll.repository.IPollRepository;
 
 import org.modelmapper.ModelMapper;
+import org.quartz.SchedulerException;
+import org.quartz.xml.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,13 +25,20 @@ public class PollService implements IPollService {
   @Autowired
   private ModelMapper modelMapper;
 
+  @Autowired
+  private SessionService sessionService;
+
   @Value("${poll.default.duration}")
   private Integer defaultDuration;
 
   @Override
-  public Poll save(PollDto poll) {
-    if (poll.getDurationMinutes() == null) {
+  public Poll save(PollDto poll) throws ValidationException {
+    if (poll.getDurationMinutes() <= 0 || poll.getDurationMinutes() == null) {
       poll.setDurationMinutes(defaultDuration);
+    }
+
+    if (poll.getStartDate().isBefore(LocalDateTime.now())) {
+      throw new ValidationException("Poll start date can't be before now.");
     }
 
     Poll pollInstance = modelMapper.map(poll, Poll.class);
@@ -44,12 +54,14 @@ public class PollService implements IPollService {
 
     pollInstance = pollRepository.save(pollInstance);
 
-    return pollInstance;
-  }
+    try {
+      sessionService.startSession(session);
+    } catch (SchedulerException e) {
 
-  @Override
-  public List<Poll> fetchList() {
-    return (List<Poll>) pollRepository.findAll();
+      e.printStackTrace();
+    }
+
+    return pollInstance;
   }
 
 }
