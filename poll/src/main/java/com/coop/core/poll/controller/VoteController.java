@@ -5,7 +5,9 @@ import com.coop.core.poll.model.Session;
 import com.coop.core.poll.model.Vote;
 import com.coop.core.poll.service.IVoteService;
 
+import org.quartz.xml.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,11 +22,12 @@ public class VoteController {
   private IVoteService voteService;
 
   @RequestMapping(method = RequestMethod.POST)
-  public Vote save(@RequestBody VoteDto voteDto, @PathVariable("sessionId") Session session) {
+  public ResponseEntity<Vote> save(@RequestBody VoteDto voteDto, @PathVariable("sessionId") Session session)
+      throws ValidationException {
     voteDto.setSession(session);
 
     Vote voteInstance = voteService.save(voteDto);
 
-    return voteInstance;
+    return ResponseEntity.ok(voteInstance);
   }
 }
