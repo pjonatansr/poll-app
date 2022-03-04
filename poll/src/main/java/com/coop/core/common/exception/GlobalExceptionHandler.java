@@ -1,5 +1,7 @@
 package com.coop.core.common.exception;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,7 @@ import com.coop.core.common.error.ApiValidationError;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+  Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
   @Value("${reflectoring.trace:false}")
   private boolean printStackTrace;
@@ -66,7 +69,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   private ResponseEntity<Object> buildErrorResponse(Exception exception,
       HttpStatus httpStatus,
       WebRequest request) {
-    return buildErrorResponse(exception, exception.getMessage(), httpStatus, request);
+
+    return buildErrorResponse(exception, exception.getLocalizedMessage(), httpStatus, request);
   }
 
   private ResponseEntity<Object> buildErrorResponse(Exception exception,
@@ -75,17 +79,19 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
       WebRequest request) {
     ApiError errorResponse = new ApiError(httpStatus, message, exception);
 
+    logger.error(errorResponse.getDebugMessage(), exception);
+
     return ResponseEntity.status(httpStatus).body(errorResponse);
   }
 
   @Override
   public ResponseEntity<Object> handleExceptionInternal(
-      Exception ex,
+      Exception exception,
       Object body,
       HttpHeaders headers,
       HttpStatus status,
       WebRequest request) {
 
-    return buildErrorResponse(ex, status, request);
+    return buildErrorResponse(exception, status, request);
   }
 }
