@@ -27,6 +27,9 @@ public class VoteService implements IVoteService {
   @Autowired
   private ModelMapper modelMapper;
 
+  @Autowired
+  private IMemberConsumerService memberConsumerService;
+
   @Override
   public Vote save(VoteDto voteDto) {
     Member member = voteDto.getMember();
@@ -43,9 +46,12 @@ public class VoteService implements IVoteService {
 
       boolean isStartDateBeforeNow = startDate.isBefore(LocalDateTime.now());
       boolean isEndDateAfterNow = endDate.isAfter(LocalDateTime.now());
-      boolean canVote = isStartDateBeforeNow && isEndDateAfterNow;
+      boolean isPollNotClosed = isStartDateBeforeNow
+          && isEndDateAfterNow;
 
-      if (canVote) {
+      boolean isMemberAbleToVote = memberConsumerService.isMemberAbleToVote(member.getCpf());
+
+      if (isPollNotClosed && isMemberAbleToVote) {
         Vote voteInstance = modelMapper.map(voteDto, Vote.class);
         return voteRepository.save(voteInstance);
       }
