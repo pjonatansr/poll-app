@@ -2,8 +2,7 @@ package com.coop.core.poll.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
-import com.coop.core.common.model.BaseEntity;
+import javax.persistence.Id;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +10,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Member extends BaseEntity {
+public class Member {
+  @Id
+  private Long id;
+
   @Column(name = "description")
   private String cpf;
 
@@ -23,4 +25,11 @@ public class Member extends BaseEntity {
     this.cpf = cpf;
   }
 
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
 }

@@ -6,28 +6,33 @@ import javax.persistence.OneToOne;
 
 import com.coop.core.common.model.BaseEntity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @Entity
-@Data
-@NoArgsConstructor
 public class Result extends BaseEntity {
-  @OneToOne(targetEntity = Session.class)
-  private Session pollSession;
+  @OneToOne()
+  private Session session;
 
   @Column(name = "fl_approved", nullable = false)
   private boolean approved;
 
   @Column(name = "total_percent_win")
-  private int totalPercentWin;
+  private float totalPercentWin;
 
-  public Session getPollSession() {
-    return pollSession;
+  @Column(name = "vote_count")
+  private int voteCount;
+
+  public Result(Session session, boolean approved, float totalPercentWin, int voteCount) {
+    this.session = session;
+    this.approved = approved;
+    this.totalPercentWin = totalPercentWin;
+    this.voteCount = voteCount;
   }
 
-  public void setPollSessionId(Session pollSession) {
-    this.pollSession = pollSession;
+  public Session getSession() {
+    return session;
+  }
+
+  public void setSession(Session session) {
+    this.session = session;
   }
 
   public boolean isApproved() {
@@ -38,12 +43,20 @@ public class Result extends BaseEntity {
     this.approved = approved;
   }
 
-  public int getTotalPercentWin() {
+  public float getTotalPercentWin() {
     return this.totalPercentWin;
   }
 
-  public void setTotalPercentWin(int totalPercentWin) {
+  public void setTotalPercentWin(float totalPercentWin) {
     this.totalPercentWin = totalPercentWin;
+  }
+
+  public int getVoteCount() {
+    return this.voteCount;
+  }
+
+  public void setVoteCount(int voteCount) {
+    this.voteCount = voteCount;
   }
 
 }
