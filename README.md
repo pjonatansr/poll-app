@@ -4,7 +4,7 @@ That project solves a hypothetical situation where some cooperative members need
 ## Get started
 
 ### Create Poll
-To create a poll, you can use the follow action in the endpoint "/api/v1/polls" with the HTTP POST method. That endpoint receives a body request with three parameters:
+To create a poll, you can use the follows action in the endpoint "/api/v1/polls" with the HTTP POST method. That endpoint receives a body request with three parameters:
 
 |Property|Type|Description|
 |---|---|---|
@@ -22,10 +22,10 @@ RequestBody Example:
 ```
 
 Whenever the user creates a poll, the application will generate a session and schedule a QuartzJobBean to the poll end date. That job will be responsible to call the method to calculate the result. 
-The QuartzJobs aren't persisted in database, if the application stops when  a QuartzJob is waiting to execute, the QuartzJob will only execute when the next access to the result occurs.
+The QuartzJobs aren't persisted in database, if the application stops when a QuartzJob is waiting to execute, the QuartzJob will only execute when the next access to the result occurs.
 
 ### Vote
-To vote, do you need to wait until the respective poll start. After that, you only have the time given through the duration inserted with the registered pull.  You can use the POST method /api/v1/sessions/{sessionId}/votes, passing the sessionId in the URL and the request body with the follow parameters:
+To vote, do you need to wait until the respective poll start. After that, you only have the time given through the duration inserted with the registered pull.  You can use the POST method /api/v1/sessions/{sessionId}/votes, passing the sessionId in the URL and the request body with the follows parameters:
 
 |Property|Type|Description|
 |---|---|---|
