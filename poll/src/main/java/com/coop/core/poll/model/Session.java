@@ -1,14 +1,12 @@
 package com.coop.core.poll.model;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.coop.core.common.model.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -31,11 +29,6 @@ public class Session extends BaseEntity {
     this.startDate = startDate;
   }
 
-  @OneToMany(mappedBy = "session", cascade = {
-      CascadeType.ALL
-  })
-  private List<Vote> votes;
-
   public Session() {
   }
 
@@ -55,9 +48,5 @@ public class Session extends BaseEntity {
 
   public void setPoll(Poll poll) {
     this.poll = poll;
-  }
-
-  public List<Vote> getVows() {
-    return votes;
   }
 }
