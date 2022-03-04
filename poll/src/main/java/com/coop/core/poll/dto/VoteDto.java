@@ -3,9 +3,6 @@ package com.coop.core.poll.dto;
 import com.coop.core.poll.model.Member;
 import com.coop.core.poll.model.Session;
 
-import lombok.Data;
-
-@Data
 public class VoteDto {
   private Boolean value;
   private Member member;
