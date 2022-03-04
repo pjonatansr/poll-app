@@ -20,6 +20,9 @@ public class Result extends BaseEntity {
   @Column(name = "vote_count")
   private int voteCount;
 
+  public Result() {
+  }
+
   public Result(Session session, boolean approved, float totalPercentWin, int voteCount) {
     this.session = session;
     this.approved = approved;

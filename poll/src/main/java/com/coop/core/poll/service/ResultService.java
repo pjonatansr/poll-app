@@ -23,23 +23,29 @@ public class ResultService implements IResultService {
   @Override
   public void calculateResult(Session session) {
     List<Vote> votes = voteRepository.getRegularVotesBySessionId(session.getId());
+    Result result;
+    if (!votes.isEmpty()) {
 
-    if (votes.isEmpty()) {
-      System.out.println("No Votes");
+      int numVotes = votes.size();
+      int numApprovations = (int) votes
+          .stream()
+          .filter(Vote::isValue)
+          .count();
+
+      boolean isApproved = numApprovations > numVotes / 2;
+
+      float totalPercentWin = (float) ((100f * numApprovations) / numVotes);
+      result = new Result(session, isApproved, totalPercentWin, numVotes);
+    } else {
+      result = new Result(session, false, 0, 0);
     }
 
-    int numVotes = votes.size();
-    int numApprovations = (int) votes
-        .stream()
-        .filter(Vote::isValue)
-        .count();
-
-    boolean isApproved = numApprovations > numVotes / 2;
-
-    float totalPercentWin = (float) ((100f * numApprovations) / numVotes);
-    Result result = new Result(session, isApproved, totalPercentWin, numVotes);
-
     resultRepository.save(result);
-
   }
+
+  @Override
+  public Result getBySessionId(Long sessionId) {
+    return resultRepository.getResultBySessionId(sessionId);
+  }
+
 }
