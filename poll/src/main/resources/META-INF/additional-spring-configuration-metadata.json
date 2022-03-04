@@ -1,5 +1,27 @@
-{"properties": [{
-  "name": "poll.default.duration",
-  "type": "java.lang.String",
-  "description": "A description for 'poll.default.duration'"
-}]}
+{"properties": [
+  {
+    "name": "poll.default.duration",
+    "type": "java.lang.String",
+    "description": "A description for 'poll.default.duration'"
+  },
+  {
+    "name": "member.service.default.url",
+    "type": "java.lang.String",
+    "description": "A description for 'member.service.default.url'"
+  },
+  {
+    "name": "member.default.permited.message",
+    "type": "java.lang.String",
+    "description": "A description for 'member.default.permited.message'"
+  },
+  {
+    "name": "member.default.authorized.status",
+    "type": "java.lang.String",
+    "description": "A description for 'member.default.authorized.status'"
+  },
+  {
+    "name": "springdoc.swagger-ui.path",
+    "type": "java.lang.String",
+    "description": "A description for 'springdoc.swagger-ui.path'"
+  }
+]}
