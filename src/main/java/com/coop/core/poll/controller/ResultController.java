@@ -1,5 +1,6 @@
 package com.coop.core.poll.controller;
 
+import com.coop.core.common.exception.ValidationException;
 import com.coop.core.poll.model.Result;
 import com.coop.core.poll.service.IResultService;
 
@@ -18,7 +19,8 @@ public class ResultController {
   private IResultService resultService;
 
   @RequestMapping(method = RequestMethod.GET)
-  public ResponseEntity<Result> getResult(@PathVariable("sessionId") Long sessionId) {
+  public ResponseEntity<Result> getResult(@PathVariable("sessionId") Long sessionId)
+      throws ValidationException {
     Result resultInstance = resultService.getBySessionId(sessionId);
 
     return ResponseEntity.ok(resultInstance);
