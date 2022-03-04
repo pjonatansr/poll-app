@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import com.coop.core.common.exception.NoSuchElementFoundException;
 import com.coop.core.common.exception.ValidationException;
 import com.coop.core.poll.model.Result;
 import com.coop.core.poll.model.Session;
@@ -51,21 +52,29 @@ public class ResultService implements IResultService {
   }
 
   @Override
-  public Result getBySessionId(Long sessionId) throws ValidationException {
+  public Result getBySessionId(Long sessionId) throws RuntimeException {
     Result result = resultRepository.getResultBySessionId(sessionId);
 
     if (result == null) {
       Session session = sessionRepository.findById(sessionId).get();
+
+      if (session.getStartDate().isBefore(LocalDateTime.now())) {
+        throw new NoSuchElementFoundException("Poll is not started.");
+      }
+
       int pollDuration = session.getPoll().getDurationMinutes();
-      LocalDateTime endDate = session.getStartDate().plus(pollDuration + 5, ChronoUnit.MINUTES);
+      LocalDateTime endDate = session.getStartDate().plus(pollDuration, ChronoUnit.MINUTES);
+      if (endDate.isAfter(LocalDateTime.now())) {
+        throw new NoSuchElementFoundException("Poll is not finished.");
+      }
 
       if (endDate.isBefore(LocalDateTime.now())) {
         calculateResult(session);
-        result = resultRepository.getResultBySessionId(sessionId);
+        return resultRepository.getResultBySessionId(sessionId);
+      }
 
-        if (result == null) {
-          throw new ValidationException("That poll ended with no votes.");
-        }
+      if (result == null) {
+        throw new ValidationException("That poll has no votes.");
       }
     }
 

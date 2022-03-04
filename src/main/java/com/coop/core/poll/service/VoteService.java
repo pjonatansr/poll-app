@@ -1,14 +1,12 @@
 package com.coop.core.poll.service;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 import com.coop.core.common.exception.ValidationException;
 import com.coop.core.poll.dto.VoteDto;
 import com.coop.core.poll.model.Member;
 import com.coop.core.poll.model.Session;
 import com.coop.core.poll.model.Vote;
-import com.coop.core.poll.repository.IMemberRepository;
 import com.coop.core.poll.repository.IVoteRepository;
 
 import org.modelmapper.ModelMapper;
@@ -22,43 +20,47 @@ public class VoteService implements IVoteService {
   private IVoteRepository voteRepository;
 
   @Autowired
-  private IMemberRepository memberRepository;
-
-  @Autowired
   private ModelMapper modelMapper;
 
   @Autowired
   private IMemberConsumerService memberConsumerService;
 
+  @Autowired
+  private IMemberService memberService;
+
   @Override
   public Vote save(VoteDto voteDto) {
-    Member member = voteDto.getMember();
-    boolean isExistentMember = memberRepository.existsById(member.getId());
-    if (!isExistentMember) {
-      memberRepository.save(member);
-    }
-
     Session requestedSession = voteDto.getSession();
+
     if (requestedSession.getId() > 0) {
       LocalDateTime startDate = requestedSession.getStartDate();
+      Member member = memberService.getOrSaveMember(voteDto.getMember());
+      int duration = requestedSession.getPoll().getDurationMinutes();
+      validate(startDate, member, duration);
 
-      LocalDateTime endDate = startDate.plus(requestedSession.getPoll().getDurationMinutes(), ChronoUnit.MINUTES);
-
-      boolean isStartDateBeforeNow = startDate.isBefore(LocalDateTime.now());
-      boolean isEndDateAfterNow = endDate.isAfter(LocalDateTime.now());
-      boolean isPollNotClosed = isStartDateBeforeNow
-          && isEndDateAfterNow;
-
-      boolean isMemberAbleToVote = memberConsumerService.isMemberAbleToVote(member.getCpf());
-
-      if (isPollNotClosed && isMemberAbleToVote) {
-        Vote voteInstance = modelMapper.map(voteDto, Vote.class);
-        return voteRepository.save(voteInstance);
-      }
-
-      throw new ValidationException("Oops, the poll is closed.");
+      Vote voteInstance = modelMapper.map(voteDto, Vote.class);
+      return voteRepository.save(voteInstance);
     }
 
     throw new ValidationException("Session is not valid.");
+  }
+
+  private void validate(LocalDateTime startDate, Member member, int duration) {
+    LocalDateTime endDate = startDate.plusMinutes(duration);
+    boolean isStartDateBeforeNow = startDate.isBefore(LocalDateTime.now());
+    boolean isEndDateAfterNow = endDate.isAfter(LocalDateTime.now());
+    boolean isMemberAbleToVote = memberConsumerService.isMemberAbleToVote(member.getCpf());
+
+    if (!isStartDateBeforeNow) {
+      throw new ValidationException("The poll is not started");
+    }
+
+    if (!isEndDateAfterNow) {
+      throw new ValidationException("The poll is closed");
+    }
+
+    if (!isMemberAbleToVote) {
+      throw new ValidationException("You are not able to vote in this poll");
+    }
   }
 }

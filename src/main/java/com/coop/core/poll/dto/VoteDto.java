@@ -1,11 +1,16 @@
 package com.coop.core.poll.dto;
 
+import javax.validation.constraints.NotNull;
+
 import com.coop.core.poll.model.Member;
 import com.coop.core.poll.model.Session;
 
 public class VoteDto {
+  @NotNull
   private Boolean value;
+  @NotNull
   private Member member;
+  @NotNull
   private Session session;
 
   public Boolean getValue() {
