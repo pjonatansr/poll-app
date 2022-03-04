@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/sessions/{sessionId}/votes")
+@RequestMapping("api/v1/sessions/{sessionId}/votes")
 public class VoteController {
 
   @Autowired
