@@ -19,7 +19,7 @@ public class MemberConsumerService implements IMemberConsumerService {
   @Override
   public boolean isMemberAbleToVote(String cpf) {
     RestTemplate restTemplate = new RestTemplate();
-    MemberDto memberDto = restTemplate.getForObject(defaultUrl, MemberDto.class);
+    MemberDto memberDto = restTemplate.getForObject(defaultUrl + cpf, MemberDto.class);
     boolean isAuthorized = memberDto.getStatus().equals(authorizedStatus);
 
     return isAuthorized;
