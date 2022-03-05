@@ -40,7 +40,7 @@ See the example:
     "value": true, 
     "member": {
         "id":11,
-        "cpf":"85474096534"
+        "cpf":"12373484048"
     }
 }
 ```
