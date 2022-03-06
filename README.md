@@ -55,3 +55,7 @@ Whenever a session closes, the app executes the job that was scheduled with the 
 Here is the link for the published version that was deployed on heroku
 
 URL: https://coop-poll.herokuapp.com/
+
+### Full documentation 
+
+See [here](/src/main/resources/static/doc/AllInOne-V202203052215.md) another doc generated with smart-doc
