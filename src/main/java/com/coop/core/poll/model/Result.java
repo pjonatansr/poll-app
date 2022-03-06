@@ -30,34 +30,66 @@ public class Result extends BaseEntity {
     this.voteCount = voteCount;
   }
 
+  
+  /** 
+   * @return Session
+   */
   public Session getSession() {
     return session;
   }
 
+  
+  /** 
+   * @param session
+   */
   public void setSession(Session session) {
     this.session = session;
   }
 
+  
+  /** 
+   * @return boolean
+   */
   public boolean isApproved() {
     return this.approved;
   }
 
+  
+  /** 
+   * @param approved
+   */
   public void setApproved(boolean approved) {
     this.approved = approved;
   }
 
+  
+  /** 
+   * @return float
+   */
   public float getTotalPercentWin() {
     return this.totalPercentWin;
   }
 
+  
+  /** 
+   * @param totalPercentWin
+   */
   public void setTotalPercentWin(float totalPercentWin) {
     this.totalPercentWin = totalPercentWin;
   }
 
+  
+  /** 
+   * @return int
+   */
   public int getVoteCount() {
     return this.voteCount;
   }
 
+  
+  /** 
+   * @param voteCount
+   */
   public void setVoteCount(int voteCount) {
     this.voteCount = voteCount;
   }

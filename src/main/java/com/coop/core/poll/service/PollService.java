@@ -35,6 +35,12 @@ public class PollService implements IPollService {
   @Value("${poll.default.duration}")
   private Integer defaultDuration;
 
+  
+  /** 
+   * @param poll
+   * @return Poll
+   * @throws ValidationException
+   */
   @Override
   public Poll save(PollDto poll) throws ValidationException {
     if (poll.getDurationMinutes() <= 0 || poll.getDurationMinutes() == null) {

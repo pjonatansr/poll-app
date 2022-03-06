@@ -23,10 +23,18 @@ public class Vote extends BaseEntity {
   @JoinColumn(name = "session_id")
   private Session session;
 
+  
+  /** 
+   * @return Session
+   */
   public Session getSession() {
     return this.session;
   }
 
+  
+  /** 
+   * @param session
+   */
   public void setSession(Session session) {
     this.session = session;
   }
@@ -39,18 +47,34 @@ public class Vote extends BaseEntity {
   public Vote() {
   }
 
+  
+  /** 
+   * @return boolean
+   */
   public boolean isValue() {
     return value;
   }
 
+  
+  /** 
+   * @param value
+   */
   public void setValue(boolean value) {
     this.value = value;
   }
 
+  
+  /** 
+   * @return Member
+   */
   public Member getMember() {
     return member;
   }
 
+  
+  /** 
+   * @param member
+   */
   public void setMember(Member member) {
     this.member = member;
   }

@@ -16,42 +16,82 @@ public class ApiError {
   private String debugMessage;
   private List<ApiSubError> subErrors;
 
+  
+  /** 
+   * @return HttpStatus
+   */
   public HttpStatus getStatus() {
     return this.status;
   }
 
+  
+  /** 
+   * @param status
+   */
   public void setStatus(HttpStatus status) {
     this.status = status;
   }
 
+  
+  /** 
+   * @return LocalDateTime
+   */
   public LocalDateTime getTimestamp() {
     return this.timestamp;
   }
 
+  
+  /** 
+   * @param timestamp
+   */
   public void setTimestamp(LocalDateTime timestamp) {
     this.timestamp = timestamp;
   }
 
+  
+  /** 
+   * @return String
+   */
   public String getMessage() {
     return this.message;
   }
 
+  
+  /** 
+   * @param message
+   */
   public void setMessage(String message) {
     this.message = message;
   }
 
+  
+  /** 
+   * @return String
+   */
   public String getDebugMessage() {
     return this.debugMessage;
   }
 
+  
+  /** 
+   * @param debugMessage
+   */
   public void setDebugMessage(String debugMessage) {
     this.debugMessage = debugMessage;
   }
 
+  
+  /** 
+   * @return List<ApiSubError>
+   */
   public List<ApiSubError> getSubErrors() {
     return this.subErrors;
   }
 
+  
+  /** 
+   * @param subErrors
+   */
   public void setSubErrors(List<ApiSubError> subErrors) {
     this.subErrors = subErrors;
   }

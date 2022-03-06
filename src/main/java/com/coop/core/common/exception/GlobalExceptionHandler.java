@@ -27,6 +27,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   @Value("${reflectoring.trace:false}")
   private boolean printStackTrace;
 
+  
+  /** 
+   * @param ex
+   * @param headers
+   * @param status
+   * @param request
+   * @return ResponseEntity<Object>
+   */
   @Override
   @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
   protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
@@ -45,6 +53,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return ResponseEntity.unprocessableEntity().body(errorResponse);
   }
 
+  
+  /** 
+   * @param itemNotFoundException
+   * @param request
+   * @return ResponseEntity<Object>
+   */
   @ExceptionHandler(NoSuchElementFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
   public ResponseEntity<Object> handleNoSuchElementFoundException(NoSuchElementFoundException itemNotFoundException,
@@ -52,6 +66,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return buildErrorResponse(itemNotFoundException, HttpStatus.NOT_FOUND, request);
   }
 
+  
+  /** 
+   * @param exception
+   * @param request
+   * @return ResponseEntity<Object>
+   */
   @ExceptionHandler(ValidationException.class)
   public ResponseEntity<Object> handleValidationException(
       ValidationException exception,
@@ -59,6 +79,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return buildErrorResponse(exception, exception.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY, request);
   }
 
+  
+  /** 
+   * @param exception
+   * @param request
+   * @return ResponseEntity<Object>
+   */
   @ExceptionHandler(Exception.class)
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   public ResponseEntity<Object> handleAllUncaughtException(Exception exception, WebRequest request) {
@@ -66,6 +92,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return buildErrorResponse(exception, "Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR, request);
   }
 
+  
+  /** 
+   * @param exception
+   * @param httpStatus
+   * @param request
+   * @return ResponseEntity<Object>
+   */
   private ResponseEntity<Object> buildErrorResponse(Exception exception,
       HttpStatus httpStatus,
       WebRequest request) {
@@ -73,6 +106,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return buildErrorResponse(exception, exception.getLocalizedMessage(), httpStatus, request);
   }
 
+  
+  /** 
+   * @param exception
+   * @param message
+   * @param httpStatus
+   * @param request
+   * @return ResponseEntity<Object>
+   */
   private ResponseEntity<Object> buildErrorResponse(Exception exception,
       String message,
       HttpStatus httpStatus,
@@ -84,6 +125,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return ResponseEntity.status(httpStatus).body(errorResponse);
   }
 
+  
+  /** 
+   * @param exception
+   * @param body
+   * @param headers
+   * @param status
+   * @param request
+   * @return ResponseEntity<Object>
+   */
   @Override
   public ResponseEntity<Object> handleExceptionInternal(
       Exception exception,

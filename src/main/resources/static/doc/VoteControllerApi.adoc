@@ -1,0 +1,74 @@
+
+== 
+=== 
+*URL:* `/api/v1/sessions/{sessionId}/votes/`
+
+*Type:* `POST`
+
+
+*Content-Type:* `application/json; charset=utf-8`
+
+*Description:* 
+
+
+
+
+
+*Request-parameters:*
+
+[width="100%",options="header"]
+[stripes=even]
+|====================
+|Parameter | Type|Description|Required|Since
+|value|boolean|No comments found.|true|-
+|member|object|No comments found.|true|-
+|└─id|int64|No comments found.|false|-
+|└─cpf|string|No comments found.|false|-
+|session|object|No comments found.|true|-
+|└─id|int64|No comments found.|false|-
+|└─startDate|string|No comments found.|false|-
+|id|int64|No comments found.|false|-
+|startDate|string|No comments found.|false|-
+|====================
+
+
+*Request-example:*
+----
+curl -X POST -H 'Content-Type: application/json; charset=utf-8' -i /api/v1/sessions/votes/ --data '{
+  "value": true,
+  "member": {
+    "id": 729,
+    "cpf": "ltfn5x"
+  },
+  "session": {
+    "id": 46,
+    "startDate": "2022-03-05 21:33:14"
+  }
+}'
+----
+*Response-fields:*
+
+[width="100%",options="header"]
+[stripes=even]
+|====================
+|Field | Type|Description|Since
+|id|int64|No comments found.|-
+|value|boolean|No comments found.|-
+|member|object|No comments found.|-
+|└─id|int64|No comments found.|-
+|└─cpf|string|No comments found.|-
+|====================
+
+
+*Response-example:*
+----
+{
+  "id": 998,
+  "value": true,
+  "member": {
+    "id": 586,
+    "cpf": "0ky0zw"
+  }
+}
+----
+

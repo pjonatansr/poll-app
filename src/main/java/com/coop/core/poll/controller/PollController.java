@@ -19,6 +19,13 @@ public class PollController {
   @Autowired
   private IPollService pollService;
 
+  /**
+   * Add poll
+   * 
+   * @param pollDto
+   * @return ResponseEntity<Poll>
+   * @throws ValidationException
+   */
   @RequestMapping(method = RequestMethod.POST)
   public ResponseEntity<Poll> save(@RequestBody PollDto pollDto) throws ValidationException {
     Poll pollInstance = pollService.save(pollDto);

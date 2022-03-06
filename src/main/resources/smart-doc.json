@@ -1,0 +1,11 @@
+{
+   "outPath": "src/main/resources/static/doc",
+   "allInOne": true, // whether to merge documents into one file, generally recommended as true
+   "isStrict": true, //If the strict mode is set to true, Smart-doc forces that the public method in each interface in the code has a comment.
+   "serverUrl": "https://coop-poll.herokuapp.com/", // Set the server address, not required
+   "createDebugPage": true,//Create a page that can be used to test your APIs like swagger
+   "language":"ENGLISH",//support ENGLISH and CHINESE
+   "projectName": "coop-poll", // Configure your own project name
+   "sortByTitle":true,//Sort by interface title, the default value is false
+   "recursionLimit":2// Set the number of recursive executions to avoid stack overflow, the default is 7
+}

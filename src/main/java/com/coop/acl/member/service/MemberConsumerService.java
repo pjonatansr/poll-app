@@ -16,6 +16,11 @@ public class MemberConsumerService implements IMemberConsumerService {
   @Value("${member.default.authorized.status}")
   private String authorizedStatus;
 
+  
+  /** 
+   * @param cpf
+   * @return boolean
+   */
   @Override
   public boolean isMemberAbleToVote(String cpf) {
     RestTemplate restTemplate = new RestTemplate();

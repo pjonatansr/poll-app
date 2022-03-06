@@ -30,10 +30,23 @@ public class PollControllerTest {
 
   @Test
   void shouldCreateNewPoll() throws Exception {
+    String description = "Is poll working well?";
+    int duration = 20;
+    LocalDateTime startDate = LocalDateTime.now().plusMinutes(1);
+
+    PollDto pollDto = new PollDto(description, duration, startDate);
     ResponseEntity<Poll> response = restTemplate.postForEntity("/api/v1/polls",
-        new PollDto("Is poll working well?", 20, LocalDateTime.now().plusMinutes(1)), Poll.class);
+        pollDto, Poll.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    // assertThat(response.getBody()).isNotNull();
+
+    // List<Session> sessions = poll.getSessions();
+    // Session session = sessions.get(0);
+    // assertThat(poll.getDescription()).isEqualTo(description);
+    // assertThat(poll.getDurationMinutes()).isEqualTo(duration);
+    // assertThat(sessions.size()).isEqualTo(1);
+    // assertThat(session.getStartDate()).isEqualTo(startDate);
   }
 
 }

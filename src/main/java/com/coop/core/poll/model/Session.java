@@ -21,10 +21,18 @@ public class Session extends BaseEntity {
   @Column(name = "start_date", nullable = false)
   private LocalDateTime startDate;
 
+  
+  /** 
+   * @return LocalDateTime
+   */
   public LocalDateTime getStartDate() {
     return this.startDate;
   }
 
+  
+  /** 
+   * @param startDate
+   */
   public void setStartDate(LocalDateTime startDate) {
     this.startDate = startDate;
   }
@@ -42,10 +50,18 @@ public class Session extends BaseEntity {
     this.startDate = startDate;
   }
 
+  
+  /** 
+   * @return Poll
+   */
   public Poll getPoll() {
     return poll;
   }
 
+  
+  /** 
+   * @param poll
+   */
   public void setPoll(Poll poll) {
     this.poll = poll;
   }

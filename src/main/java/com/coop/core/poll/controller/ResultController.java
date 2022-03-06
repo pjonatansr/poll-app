@@ -17,6 +17,13 @@ public class ResultController {
   @Autowired
   private IResultService resultService;
 
+  /**
+   * Result
+   * 
+   * @param sessionId
+   * @return ResponseEntity<Result>
+   * @throws RuntimeException
+   */
   @RequestMapping(method = RequestMethod.GET)
   public ResponseEntity<Result> getResult(@PathVariable("sessionId") Long sessionId)
       throws RuntimeException {

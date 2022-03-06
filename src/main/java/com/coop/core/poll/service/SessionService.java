@@ -24,6 +24,11 @@ public class SessionService implements ISessionService {
   @Autowired
   private IResultService resultService;
 
+  
+  /** 
+   * @param session
+   * @throws SchedulerException
+   */
   @Override
   public void startSession(Session session) throws SchedulerException {
     SchedulerFactory schedFact = new org.quartz.impl.StdSchedulerFactory();
@@ -59,6 +64,10 @@ public class SessionService implements ISessionService {
 
   }
 
+  
+  /** 
+   * @param sessionId
+   */
   @Override
   public void endSession(long sessionId) {
     Session session = sessionRepository.findById(sessionId).get();

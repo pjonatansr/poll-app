@@ -28,6 +28,10 @@ public class ResultService implements IResultService {
   @Autowired
   private ISessionRepository sessionRepository;
 
+  
+  /** 
+   * @param session
+   */
   @Override
   public void calculateResult(Session session) {
     List<Vote> votes = voteRepository.getRegularVotesBySessionId(session.getId());
@@ -51,6 +55,12 @@ public class ResultService implements IResultService {
     resultRepository.save(result);
   }
 
+  
+  /** 
+   * @param sessionId
+   * @return Result
+   * @throws RuntimeException
+   */
   @Override
   public Result getBySessionId(Long sessionId) throws RuntimeException {
     Result result = resultRepository.getResultBySessionId(sessionId);

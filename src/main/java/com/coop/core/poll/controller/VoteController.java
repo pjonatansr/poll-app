@@ -21,6 +21,14 @@ public class VoteController {
   @Autowired
   private IVoteService voteService;
 
+  /**
+   * Vote
+   * 
+   * @param voteDto
+   * @param session
+   * @return ResponseEntity<Vote>
+   * @throws ValidationException
+   */
   @RequestMapping(method = RequestMethod.POST)
   public ResponseEntity<Vote> save(@RequestBody VoteDto voteDto, @PathVariable("sessionId") Session session)
       throws ValidationException {

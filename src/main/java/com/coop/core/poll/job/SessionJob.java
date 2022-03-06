@@ -12,6 +12,11 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 
 public class SessionJob extends QuartzJobBean implements Serializable {
 
+  
+  /** 
+   * @param context
+   * @throws JobExecutionException
+   */
   @Override
   protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
     try {

@@ -28,6 +28,11 @@ public class VoteService implements IVoteService {
   @Autowired
   private IMemberService memberService;
 
+  
+  /** 
+   * @param voteDto
+   * @return Vote
+   */
   @Override
   public Vote save(VoteDto voteDto) {
     Session requestedSession = voteDto.getSession();
@@ -45,6 +50,12 @@ public class VoteService implements IVoteService {
     throw new ValidationException("Session is not valid.");
   }
 
+  
+  /** 
+   * @param startDate
+   * @param member
+   * @param duration
+   */
   private void validate(LocalDateTime startDate, Member member, int duration) {
     LocalDateTime endDate = startDate.plusMinutes(duration);
     boolean isStartDateBeforeNow = startDate.isBefore(LocalDateTime.now());

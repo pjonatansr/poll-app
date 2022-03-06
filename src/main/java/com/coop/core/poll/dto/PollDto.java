@@ -20,26 +20,50 @@ public class PollDto {
     this.startDate = startDate;
   }
 
+  
+  /** 
+   * @return String
+   */
   public String getDescription() {
     return this.description;
   }
 
+  
+  /** 
+   * @param description
+   */
   public void setDescription(String description) {
     this.description = description;
   }
 
+  
+  /** 
+   * @return Integer
+   */
   public Integer getDurationMinutes() {
     return this.durationMinutes;
   }
 
+  
+  /** 
+   * @param durationMinutes
+   */
   public void setDurationMinutes(Integer durationMinutes) {
     this.durationMinutes = durationMinutes;
   }
 
+  
+  /** 
+   * @return LocalDateTime
+   */
   public LocalDateTime getStartDate() {
     return startDate;
   }
 
+  
+  /** 
+   * @param startDate
+   */
   public void setStartDate(LocalDateTime startDate) {
     this.startDate = startDate;
   }

@@ -11,6 +11,11 @@ public class MemberService implements IMemberService {
   @Autowired
   private IMemberRepository memberRepository;
 
+  
+  /** 
+   * @param member
+   * @return Member
+   */
   public Member getOrSaveMember(Member member) {
     boolean isExistentMember = memberRepository.existsById(member.getId());
     if (!isExistentMember) {
